@@ -1,4 +1,3 @@
-from traceback import print_tb
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, filters, mixins
@@ -12,7 +11,7 @@ from .serializers import (
     PostSerializer,
     FollowSerializer
 )
-from posts.models import Group, Post, Follow
+from posts.models import Group, Post
 
 User = get_user_model()
 
@@ -48,10 +47,10 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 
 class FollowViewSet(mixins.CreateModelMixin,
-    mixins.ListModelMixin,
-    mixins.RetrieveModelMixin,
-    viewsets.GenericViewSet
-    ):
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        viewsets.GenericViewSet
+        ):
     serializer_class = FollowSerializer
     permission_classes = (IsAuthenticated,)
     filter_backends = (filters.SearchFilter,)
